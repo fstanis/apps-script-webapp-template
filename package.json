@@ -1,0 +1,23 @@
+{
+  "name": "apps-script-webapp-template",
+  "private": true,
+  "scripts": {
+    "build": "bun run build:html && bun build src/Code.ts --outfile dist/Code.js --format=esm && cp src/appsscript.json dist/",
+    "build:html": "bun build --compile --target=browser src/index.html --outdir=dist",
+    "push": "bun run build && bun x @google/clasp push -f",
+    "deploy": "bun run push && bun x @google/clasp deploy -i $(<deploymentId)",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write ."
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "devDependencies": {
+    "@google/clasp": "^3.3.0",
+    "@types/google-apps-script": "^2.0.11",
+    "prettier": "^3.9.5"
+  },
+  "dependencies": {
+    "@knadh/oat": "^0.6.2"
+  }
+}
